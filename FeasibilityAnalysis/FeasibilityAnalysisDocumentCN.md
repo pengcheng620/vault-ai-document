@@ -9,7 +9,8 @@
 
 ## 2. 技术可行性
 ### 2.1 技术方案
-描述项目的技术方案和技术选型。
+
+[SystemDesignDocumentCN.md](..%2FSystemDesign%2FSystemDesignDocumentCN.md) 中描述项目的技术方案和技术选型。
 
 ### 2.2 技术难点
 描述项目可能遇到的技术难点和挑战。
