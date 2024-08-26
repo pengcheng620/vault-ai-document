@@ -1,87 +1,72 @@
 # Requirement Analysis Document
 
-- 需求：
-- 在 autodesk vault 开发一个侧边栏实现 ai-bot 聊天机器人的功能，
-- 实现常规的问答功能
-    - 历史对话记录
-    - 对话记录的搜索
-- 进阶功能
-    - 在回答之前调用 api：实现通过对自然语言的理解调用 vault/inventor 等内部的 api，以实现搜索文件【输出表格】，下载文件等功能
-    - 在回答之后调用 api：回答之后给出几个 button ，在用户点击之后调用 api，实现跳转外部链接、操作 vault 内部文件以及实现等功能
+# Fundamental Requirement:
+- Develop a sidebar plugin for Autodesk Vault that enables an AI-Bot to directly interact with the Vault client. Utilize AI to make the use of the Vault system simpler and more efficient for users.
 
-最根本的需求：在 Autodesk Vault 开发一个侧边栏插件，实现 AI-Bot 可以直接和 vault client 进行交互操作。通过 ai
-的手段让用户更简单高效的使用 vault 这个主系统。
+## 1. Introduction
 
-系统架构图
+### 1.1 Project Background
 
-## 1. 引言
+In modern engineering design and manufacturing industries, companies rely on efficient Product Data Management (PDM) systems to organize and manage a large number of design files and documents. Autodesk Vault is a widely used PDM software that provides users with powerful version control, file management, and team collaboration features. However, as the volume of data increases, users often face tedious and repetitive tasks when operating and managing files in Vault, affecting work efficiency.
 
-### 1.1 项目背景
+To address these challenges, this project aims to develop an integrated AI-Bot sidebar plugin for Autodesk Vault. Through this plugin, users can interact directly with the Vault system using natural language, significantly simplifying file operation processes and improving work efficiency. The AI-Bot will provide intelligent search, automated operations, personalized suggestions, and other features, enabling users to manage and operate files in Vault more easily.
 
-在现代工程设计和制造行业中，企业依赖于高效的产品数据管理（PDM）系统来组织和管理大量的设计文件和文档。Autodesk Vault 是一款广泛使用的
-PDM 软件，为用户提供了强大的版本控制、文件管理和团队协作功能。然而，随着企业数据量的增加，用户在操作和管理 Vault
-中的文件时，常常面临繁琐和重复的任务，影响工作效率。
+By introducing AI technology, the project aims to elevate the user experience of the Vault system to a new level, helping companies maintain efficiency and competitiveness in increasingly complex design environments.
 
-为了应对这些挑战，本项目旨在为 Autodesk Vault 开发一个集成的 AI-Bot 侧边栏插件。通过该插件，用户可以使用自然语言与 Vault
-系统直接交互，大幅简化文件操作流程，提升工作效率。AI-Bot 将为用户提供智能搜索、自动化操作、个性化建议等功能，使其能够更轻松地管理和操作
-Vault 中的文件。
+### 1.2 Project Scope
 
-通过引入 AI 技术，项目目标是将 Vault 系统的用户体验提升到一个新的水平，帮助企业在日益复杂的设计环境中保持高效和竞争力。
+**Functional Boundaries**
 
-### 1.2 项目范围
+- Core Features:
+    - Natural Language Search: Users can input file search requests in natural language. The AI-Bot will understand and execute the search, returning results to the user.
+    - Simplified File Operations: Users can directly perform file operations in Vault (such as open, Check In, Check Out, delete files, etc.) through the AI-Bot, simplifying the process.
+    - Automated Workflows: The AI-Bot can trigger automated operations via commands, such as batch file operations or drawing update processes.
+    - Recommendations and Tips: Based on user habits, the AI-Bot can provide personalized file recommendations and operation tips.
+    - Notifications and Alerts: The AI-Bot can send real-time notifications to users based on changes in Vault files, such as file updates or approval process changes.
+- Excluded Features:
+    - Training and deployment of large AI language models (external dependency, can use models trained by other departments)
+    - Non-Vault related functionalities
 
-**功能边界**
+**Time Boundaries**
 
-- 核心的功能：
-    - 自然语言搜索：用户可以通过自然语言输入文件搜索请求，AI-Bot 能够理解并执行搜索操作，并将结果返回给用户。
-    - 文件操作简化： 通过 AI-Bot，用户可以直接执行 Vault 中的文件操作（如打开、Check In、Check Out、删除文件等），并简化操作流程。
-    - 自动化工作流程：AI-Bot 可以通过命令触发自动化操作，比如批量文件操作或图纸更新流程。
-    - 推荐和提示：根据用户的使用习惯，AI-Bot 能够提供个性化的文件推荐、操作提示等。
-- 不实现的功能：
-    - AI 大语言模型的训练和部署【外部依赖】【可使用别的部门训练好的】
-    - 不涉及其他非 Vault 相关的功能
+- Project Start Date: xx/xx/2024
+- Project End Date: xx/xx/2025
+- Major Milestones:
+    - Completion of Requirement Analysis and Design: 31/08/2024
+    - Development Completion: xx/xx/2025
+    - Testing Completion: xx/xx/2025
 
-**时间边界**
+**Resource Boundaries**
 
-- 项目开始时间：2024年xx月xx日
-- 项目结束时间：2025年xx月xx日
-- 主要里程碑：
-    - 需求分析及设计完成：2024年08月31日
-    - 开发完成：2025年xx月xx日
-    - 测试完成：2025年xx月xx日
+- Human Resources: The project team includes x project managers, x developers, x testers.
+- Material Resources: Hardware and software equipment required for development and testing.
 
-**资源边界**
+## 2. Overview of Requirements
 
-- 人力资源：项目团队包括x名项目经理、x名开发人员、x名测试人员
-- 物力资源：开发和测试所需的硬件和软件设备
+### 2.1 Typical User Scenarios：
 
-## 2. 需求概述
+- **Quick File Search**: Users search for a design file in Vault without knowing its exact location. By inputting "find the most recently updated design file" into the AI-Bot, the search results are displayed directly.
 
-### 2.1 典型用户场景：
+- **Batch Operations**: Users need to transfer a batch of files from the development environment to the production environment. The AI-Bot can trigger a batch Check-In operation with a single command.
 
-- 文件快速搜索：用户在 Vault 中搜索一个设计文件，但不清楚具体位置。通过 AI-Bot 输入“查找最近更新的设计文件”，AI-Bot
-  直接展示搜索结果。
-
-- 批量操作：用户需要将一批文件从开发环境移交到生产环境，AI-Bot 可以通过一条命令触发批量 Check In 操作。
-
-- 自动化流程提醒：用户希望被实时提醒审批流程的进展，AI-Bot 会根据 Vault 中的文件审批情况，实时通知用户。
+- **Automated Workflow Reminders**: Users want real-time reminders of the progress of approval processes. The AI-Bot will notify users based on the approval status of files in Vault.
 
 ### 2.2 用户需求
 
-1. **高效的文件搜索**: 用户希望通过自然语言输入快速搜索 Vault 系统中的文件，并以表格形式展示搜索结果。
-2. **文件版本管理**: 用户希望通过 AI Bot 管理文件版本，包括查看历史版本和回滚到指定版本。
-3. **团队协作功能**: 用户可以查询项目状态、查看文件审批流程或向特定成员发送提醒或通知。
-4. **基于 Vault 的上下文操作**: 用户希望在 Vault 主页面上选择文本、文件或截图，然后通过右键菜单或快捷键调用 AI Bot 进行操作。
-5. **文件操作与图纸管理**: 用户希望通过点击搜索结果中的文件名，直接在 Vault 中打开文件，并进行 Check In/Check Out 等操作。
-6. **历史对话记录**: 用户希望查看和搜索与 AI Bot 的历史对话记录，以便查找之前的对话内容。
-7. **交互式按钮**: 用户希望在 AI Bot 的回答中提供交互式按钮，点击后可以执行特定操作，如跳转外部链接或操作 Vault 内部文件。
-8. **个性化推荐**: 用户希望 AI Bot 根据用户的历史操作和偏好，提供个性化的推荐和提示。
-9. **语音输入**: 用户希望通过语音输入与 AI Bot 进行交互，提高输入效率。
+1. **Efficient File Search**: Users want to quickly search for files in the Vault system using natural language input and display the results in a table format.
+2. **File Version Management**: Users want to manage file versions through the AI Bot, including viewing historical versions and rolling back to specific versions.
+3. **Team Collaboration Features**: Users can query the current status of a project, view file approval processes, or send reminders or notifications to specific members.
+4. **Contextual Operations in Vault**: Users want to be able to select text, files, or take screenshots on the Vault main page, and then use the right-click menu or shortcuts to call the AI Bot for operations.
+5. **File Operations and Drawing Management**: Users want to open files directly in Vault and perform Check In/Check Out operations by clicking on the file names in the search results.
+6. **Historical Conversation Records**: Users want to view and search historical conversation records with the AI Bot to find previous dialogue content.
+7. **Interactive Buttons**: Users want interactive buttons in the AI Bot's responses that can execute specific operations, such as linking to external sites or performing internal Vault file operations.
+8. **Personalized Recommendations**: Users want the AI Bot to provide personalized file recommendations and operation tips based on their historical actions and preferences.
+9. **Voice Input**: Users want to interact with the AI Bot using voice input to improve input efficiency.
 
 ### 2.3 系统需求
 
 1. **集成 AI 聊天机器人**: 系统需要在 Autodesk Vault 的侧边栏中集成 AI 聊天机器人，实现自然语言问答功能。
-2. **文件搜索功能**: 系统需要通过自然语言理解调用 Vault 等内部 API，实现文件搜索功能，并以表格形式展示搜索结果。
+2. **文件搜索功能**: 系统需要通过自然语言理解调用 Vault/Inventor 等内部 API，实现文件搜索功能，并以表格形式展示搜索结果。
 3. **文件操作功能**: 系统需要提供交互式按钮，用户点击后可以调用 API 实现 Vault 内部文件的操作，如打开文件、Check In、Check
    Out 等。
 4. **图纸更新功能**: 系统需要通过自然语言理解用户需求，调用 Vault 等内部 API，实现图纸更新功能。

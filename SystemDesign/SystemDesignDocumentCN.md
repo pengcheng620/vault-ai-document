@@ -1,5 +1,6 @@
 # System Design Document
 
+![Vault AI Structure.png](Vault%20AI%20Structure.png)
 
 描述项目的技术方案和技术选型。
 
