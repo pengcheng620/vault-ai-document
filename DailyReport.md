@@ -1,3 +1,35 @@
+## Final Goals
+
+- Research the context function of langchain
+- Research the chain function call of langchain
+- Research the model integration of langchain
+
+## Daily Report - 2024-08-29
+
+
+## Daily Report - 2024-08-28
+
+### Today's Tasks
+
+- Add the context function call(without Langchain) to the Vault AI system
+- Research tools(function call) of langchain
+
+### Tomorrow's Tasks
+
+- Continue researching the langchain and write the document
+
+## Daily Report - 2024-08-27
+
+### Today's Pending Tasks
+
+- Research and coding the context function of langchain
+- Write a [document](https://wiki.autodesk.com/display/V/Langchain%3A+Context-Based+Function+Call) for langchain
+  research
+
+### Tomorrow's Tasks
+
+- Continue researching the langchain and write the document
+
 ## Daily Report - 2024-08-26
 
 ### Today's Completed Tasks
